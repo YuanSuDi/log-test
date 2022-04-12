@@ -1,2 +1,16 @@
 <p>logtest works!</p>
+<div>
+    <span>log:</span>
+    <input type="text" [(ngModel)]="logCon">
+</div>
+<div>
+    <span>LogLevel:</span>
+    <span>log</span><input type="radio" [(ngModel)]="logLevel" value="0">
+    <span>debug</span><input type="radio" [(ngModel)]="logLevel" value="1">
+    <span>info</span><input type="radio" [(ngModel)]="logLevel" value="2">
+    <span>warn</span><input type="radio" [(ngModel)]="logLevel" value="3">
+    <span>error</span><input type="radio" [(ngModel)]="logLevel" value="4">
+</div>
+
 <button (click)="logtest()">Log Test</button>
+<button (click)="logClear()">Clear Log Test</button>

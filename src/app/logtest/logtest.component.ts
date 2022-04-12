@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { LogService } from '../log.service';
+import { Component, OnInit,Input } from '@angular/core';
+import { LogLevel, LogService } from '../log.service';
 
 @Component({
   selector: 'app-logtest',
@@ -9,19 +9,37 @@ import { LogService } from '../log.service';
 export class LogtestComponent implements OnInit {
 
   constructor(
-    private logService: LogService
+    private logger: LogService
   ) { }
 
   ngOnInit(): void {
   }
 
+  logCon:string = ''
+  logLevel: string = LogLevel.All.toString()
+
   logtest() {
-    this.logService.info("Test 2 Parameters", "Paul", "Smith");
-
-    this.logService.error("Test Mixed Parameters", true, false, "Paul", "Smith");
-
-    let values = ["1", "Paul", "Smith"];
-    this.logService.warn("Test String and Array", "Some log entry", values);
+    if(this.logCon){
+      switch (this.logLevel){
+        case LogLevel.Debug.toString():
+          this.logger.debug(this.logCon);
+          break;
+        case LogLevel.Info.toString():
+          this.logger.info(this.logCon);
+          break;
+        case LogLevel.Warn.toString():
+          this.logger.warn(this.logCon);
+          break;
+        case LogLevel.Error.toString():
+          this.logger.error(this.logCon);
+          break;
+        default:
+          this.logger.log(this.logCon);
+      }
+    }
   }
 
+  logClear() {
+    this.logger.clearLocalStorageLog()
+  }
 }
